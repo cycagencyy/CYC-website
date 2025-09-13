@@ -564,7 +564,7 @@ function Home() {
               {language === 'ar' ? 'الزوار المباشرون' : 'Live Visitors'}
             </h2>
             <p className="text-gray-500 dark:text-gray-400 mb-6 text-sm">
-              {language === 'ar' ? 'انضم إلى زوارنا المباشرين' : 'Join our live visitors'}
+              {language === 'ar' ? 'انضم إلى زوارنا الحاليين' : 'Join our current visitors'}
             </p>
             <div className="flex justify-center">
               <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-600">

@@ -7,9 +7,9 @@ function VisitorCounter() {
   useEffect(() => {
     // Simulate loading visitor count
     const loadVisitorCount = () => {
-      // More realistic visitor count for a marketing agency
-      const baseCount = 47 // Starting count - more realistic
-      const randomIncrement = Math.floor(Math.random() * 8) + 1
+      // Very realistic visitor count for a marketing agency
+      const baseCount = 3 // Starting count - very realistic for a marketing agency
+      const randomIncrement = Math.floor(Math.random() * 4) + 1 // 1-4 visitors
       const totalCount = baseCount + randomIncrement
       
       setVisitorCount(totalCount)
@@ -19,14 +19,21 @@ function VisitorCounter() {
     // Load initial count
     loadVisitorCount()
 
-    // Update count every 2-3 minutes to simulate realistic visitor patterns
+    // Update count every 5-8 minutes to simulate very realistic visitor patterns
     const interval = setInterval(() => {
-      // Sometimes increase, sometimes stay the same (more realistic)
-      const shouldUpdate = Math.random() > 0.3 // 70% chance to update
+      // Very low chance to update (realistic for marketing agency)
+      const shouldUpdate = Math.random() > 0.7 // 30% chance to update
       if (shouldUpdate) {
-        setVisitorCount(prev => prev + Math.floor(Math.random() * 2) + 1)
+        // Sometimes increase by 1, sometimes decrease by 1, sometimes stay same
+        const change = Math.random()
+        if (change < 0.4) {
+          setVisitorCount(prev => Math.max(1, prev + 1)) // Increase by 1
+        } else if (change < 0.6) {
+          setVisitorCount(prev => Math.max(1, prev - 1)) // Decrease by 1
+        }
+        // 40% chance to stay the same
       }
-    }, 120000) // Every 2 minutes
+    }, 300000) // Every 5 minutes
 
     return () => clearInterval(interval)
   }, [])
