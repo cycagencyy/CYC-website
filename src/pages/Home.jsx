@@ -477,7 +477,8 @@ function Home() {
               {language === 'en' ? 'From startups to established companies, we help businesses across MENA achieve their digital transformation goals' : 'من الشركات الناشئة إلى الشركات الراسخة، نساعد الشركات عبر الشرق الأوسط وشمال أفريقيا على تحقيق أهداف التحول الرقمي'}
             </p>
           </motion.div>
-          <div className="relative overflow-hidden">
+          {/* Desktop: Animated Marquee */}
+          <div className="hidden md:block relative overflow-hidden">
             <div className="flex animate-marquee hover:pause-marquee">
               {[
                 { name: 'E-Commerce Store', color: '#4C1D95' },
@@ -511,6 +512,31 @@ function Home() {
                   <div className="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-105">
                     <div 
                       className="w-24 h-12 rounded-lg flex items-center justify-center text-white font-bold text-sm"
+                      style={{ backgroundColor: brand.color }}
+                    >
+                      {brand.name}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile: Scrollable Grid */}
+          <div className="md:hidden">
+            <div className="grid grid-cols-2 gap-4 px-4">
+              {[
+                { name: 'E-Commerce Store', color: '#4C1D95' },
+                { name: 'Restaurant Chain', color: '#FACC15' },
+                { name: 'Tech Startup', color: '#7C3AED' },
+                { name: 'Fashion Brand', color: '#10B981' },
+                { name: 'Healthcare Clinic', color: '#F59E0B' },
+                { name: 'Real Estate', color: '#EF4444' }
+              ].map((brand, index) => (
+                <div key={index} className="group">
+                  <div className="bg-white dark:bg-gray-700 p-4 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                    <div 
+                      className="w-full h-10 rounded-lg flex items-center justify-center text-white font-bold text-xs"
                       style={{ backgroundColor: brand.color }}
                     >
                       {brand.name}
