@@ -66,7 +66,9 @@ function Contact() {
       
       if (response.ok) {
         console.log('Form submitted successfully!')
-        showSuccess(language === 'en' ? 'Message sent successfully!' : 'تم إرسال الرسالة بنجاح!')
+        
+        // Show success message
+        showSuccess(language === 'en' ? 'Message sent successfully! Redirecting...' : 'تم إرسال الرسالة بنجاح! جاري التوجيه...')
         
         // Reset form
         setFormData({
@@ -79,18 +81,20 @@ function Contact() {
           message: ''
         })
         
-        // Redirect immediately to thank you page
+        // Redirect to thank you page after showing success message
         console.log('Redirecting to thank you page...')
-        navigate('/thank-you')
+        setTimeout(() => {
+          navigate('/thank-you')
+        }, 1500) // 1.5 seconds to show the success message
         
       } else {
         const errorText = await response.text()
         console.error('Form submission failed:', response.status, errorText)
-        showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
+        showError(language === 'en' ? '❌ Failed to send message. Please check your connection and try again.' : '❌ فشل في إرسال الرسالة. يرجى التحقق من الاتصال والمحاولة مرة أخرى.')
       }
     } catch (error) {
       console.error('Form submission error:', error)
-      showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
+      showError(language === 'en' ? '❌ Network error. Please check your internet connection and try again.' : '❌ خطأ في الشبكة. يرجى التحقق من الاتصال بالإنترنت والمحاولة مرة أخرى.')
     } finally {
       setIsSubmitting(false)
     }
