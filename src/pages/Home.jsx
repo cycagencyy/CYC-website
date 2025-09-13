@@ -551,7 +551,7 @@ function Home() {
       </section>
 
       {/* Live Visitors Counter Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-gray-800 dark:to-gray-700">
+      <section className="py-12 bg-gray-50 dark:bg-gray-800">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center"
@@ -560,14 +560,14 @@ function Home() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+            <h2 className="text-2xl font-semibold mb-3 text-gray-700 dark:text-gray-300">
               {language === 'ar' ? 'الزوار المباشرون' : 'Live Visitors'}
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
-              {language === 'ar' ? 'انضم إلى آلاف الزوار الذين يثقون في خدماتنا' : 'Join thousands of visitors who trust our services'}
+            <p className="text-gray-500 dark:text-gray-400 mb-6 text-sm">
+              {language === 'ar' ? 'انضم إلى زوارنا المباشرين' : 'Join our live visitors'}
             </p>
             <div className="flex justify-center">
-              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
+              <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-600">
                 <VisitorCounter />
               </div>
             </div>

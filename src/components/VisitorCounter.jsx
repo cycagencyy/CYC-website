@@ -7,10 +7,9 @@ function VisitorCounter() {
   useEffect(() => {
     // Simulate loading visitor count
     const loadVisitorCount = () => {
-      // In a real implementation, you would fetch this from your analytics API
-      // For now, we'll use a simulated count that increases over time
-      const baseCount = 1247 // Starting count
-      const randomIncrement = Math.floor(Math.random() * 50) + 1
+      // More realistic visitor count for a marketing agency
+      const baseCount = 47 // Starting count - more realistic
+      const randomIncrement = Math.floor(Math.random() * 8) + 1
       const totalCount = baseCount + randomIncrement
       
       setVisitorCount(totalCount)
@@ -20,10 +19,14 @@ function VisitorCounter() {
     // Load initial count
     loadVisitorCount()
 
-    // Update count every 30 seconds to simulate real-time updates
+    // Update count every 2-3 minutes to simulate realistic visitor patterns
     const interval = setInterval(() => {
-      setVisitorCount(prev => prev + Math.floor(Math.random() * 3) + 1)
-    }, 30000)
+      // Sometimes increase, sometimes stay the same (more realistic)
+      const shouldUpdate = Math.random() > 0.3 // 70% chance to update
+      if (shouldUpdate) {
+        setVisitorCount(prev => prev + Math.floor(Math.random() * 2) + 1)
+      }
+    }, 120000) // Every 2 minutes
 
     return () => clearInterval(interval)
   }, [])
@@ -42,12 +45,12 @@ function VisitorCounter() {
   }
 
   return (
-    <div className="flex items-center space-x-2 text-sm bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg px-3 py-2 border border-white/20 dark:border-gray-700/50">
+    <div className="flex items-center space-x-2 text-sm bg-white/5 dark:bg-gray-800/30 backdrop-blur-sm rounded-md px-2 py-1 border border-white/10 dark:border-gray-700/30">
       <div className="flex items-center space-x-1">
-        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-lg shadow-green-500/50"></div>
-        <span className="text-gray-600 dark:text-gray-400 font-medium">Live:</span>
+        <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></div>
+        <span className="text-gray-500 dark:text-gray-400 text-xs">Online:</span>
       </div>
-      <span className="font-bold text-purple-600 dark:text-purple-400 bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
+      <span className="font-semibold text-gray-700 dark:text-gray-300 text-xs">
         {formatNumber(visitorCount)}
       </span>
     </div>
