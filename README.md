@@ -41,7 +41,7 @@ A modern, responsive marketing agency website built with React, Vite, and Tailwi
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/cyc-website.git
+git clone https://github.com/cycagencyy/cyc-website.git
 cd cyc-website
 ```
 
