@@ -1,0 +1,5 @@
+[33m9807da4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Add clear success message before redirect to Thank You page
+[33m126621f[m Simplify contact form - remove complex fallback logic and fix redirect
+[33m4a131ce[m Add fallback form submission methods and enhanced debugging
+[33me8995ca[m Fix Thank You page redirect - use React Router navigate instead of window.location
+[33m9a22bb7[m Fix contact form submission - use FormData and add debugging

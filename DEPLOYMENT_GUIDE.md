@@ -128,3 +128,4 @@ Your React + Vite + Tailwind + Framer Motion website is now fully configured for
 **Upload the `dist` folder to Netlify and enjoy your fully functional website!** 🎉
 
 
+
