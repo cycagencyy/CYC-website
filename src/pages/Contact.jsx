@@ -44,7 +44,10 @@ function Contact() {
     console.log('Form submitted with data:', formData)
 
     try {
-      // Try FormData approach first (more compatible with Formspree)
+      // Try multiple approaches to ensure compatibility
+      console.log('Attempting form submission...')
+      
+      // First try: FormData approach
       const formDataToSend = new FormData()
       formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`)
       formDataToSend.append('email', formData.email)
@@ -54,7 +57,9 @@ function Contact() {
       formDataToSend.append('message', formData.message)
       formDataToSend.append('_subject', 'New Contact Form Submission - CYC Website')
       formDataToSend.append('_replyto', formData.email)
+      formDataToSend.append('_next', window.location.origin + '/thank-you')
       
+      console.log('Sending FormData to Formspree...')
       const response = await fetch('https://formspree.io/f/xkgvepgq', {
         method: 'POST',
         body: formDataToSend
@@ -80,9 +85,49 @@ function Contact() {
           navigate('/thank-you')
         }, 2000)
       } else {
-        const errorText = await response.text()
-        console.error('Form submission failed:', response.status, errorText)
-        showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
+        console.log('First attempt failed, trying JSON approach...')
+        
+        // Fallback: Try JSON approach
+        const jsonData = {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          phone: formData.phone || '',
+          company: formData.company || '',
+          service: formData.service || '',
+          message: formData.message,
+          _subject: 'New Contact Form Submission - CYC Website',
+          _replyto: formData.email
+        }
+        
+        const jsonResponse = await fetch('https://formspree.io/f/xkgvepgq', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(jsonData)
+        })
+        
+        if (jsonResponse.ok) {
+          console.log('JSON submission successful!')
+          showSuccess(language === 'en' ? 'Message sent successfully!' : 'تم إرسال الرسالة بنجاح!')
+          setFormData({
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            company: '',
+            service: '',
+            message: ''
+          })
+          setTimeout(() => {
+            navigate('/thank-you')
+          }, 2000)
+        } else {
+          const errorText = await jsonResponse.text()
+          console.error('Both attempts failed:', response.status, errorText)
+          showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error)
