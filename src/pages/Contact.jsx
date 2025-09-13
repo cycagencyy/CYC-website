@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { useToast } from '../components/Toast'
 
 function Contact() {
+  const navigate = useNavigate()
   const [language, setLanguage] = useState(() => {
     return localStorage.getItem('language') || 'en'
   })
@@ -75,7 +77,7 @@ function Contact() {
         })
         // Redirect to thank you page after 2 seconds
         setTimeout(() => {
-          window.location.href = '/thank-you'
+          navigate('/thank-you')
         }, 2000)
       } else {
         const errorText = await response.text()

@@ -165,7 +165,7 @@ if (contactForm) {
                 contactForm.reset();
                 
                 // Optional redirect to thank you
-                setTimeout(()=>{ try { window.location.href = 'thank-you.html'; } catch(_){} }, 1200);
+                setTimeout(()=>{ try { window.location.href = '/thank-you'; } catch(_){} }, 1200);
 
                 // Reset button after 3 seconds
                 setTimeout(() => {
