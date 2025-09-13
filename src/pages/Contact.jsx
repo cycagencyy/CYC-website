@@ -38,17 +38,31 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    
+    console.log('Form submitted with data:', formData)
 
     try {
+      // Try FormData approach first (more compatible with Formspree)
+      const formDataToSend = new FormData()
+      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`)
+      formDataToSend.append('email', formData.email)
+      formDataToSend.append('phone', formData.phone || '')
+      formDataToSend.append('company', formData.company || '')
+      formDataToSend.append('service', formData.service || '')
+      formDataToSend.append('message', formData.message)
+      formDataToSend.append('_subject', 'New Contact Form Submission - CYC Website')
+      formDataToSend.append('_replyto', formData.email)
+      
       const response = await fetch('https://formspree.io/f/xkgvepgq', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
+        body: formDataToSend
       })
 
+      console.log('Response status:', response.status)
+      console.log('Response ok:', response.ok)
+      
       if (response.ok) {
+        console.log('Form submitted successfully!')
         showSuccess(language === 'en' ? 'Message sent successfully!' : 'تم إرسال الرسالة بنجاح!')
         setFormData({
           firstName: '',
@@ -64,9 +78,12 @@ function Contact() {
           window.location.href = '/thank-you'
         }, 2000)
       } else {
+        const errorText = await response.text()
+        console.error('Form submission failed:', response.status, errorText)
         showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
       }
     } catch (error) {
+      console.error('Form submission error:', error)
       showError(language === 'en' ? 'Failed to send message. Please try again.' : 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.')
     } finally {
       setIsSubmitting(false)
