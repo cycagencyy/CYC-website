@@ -135,7 +135,7 @@ if (contactForm) {
         
         try {
             // Submit to Formspree (JSON API)
-            const response = await fetch('https://formspree.io/f/mandkyaz', {
+            const response = await fetch('https://formspree.io/f/xkgvepgq', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
