@@ -1,0 +1,241 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* تحسينات الأداء للموبايل */
+@media (max-width: 768px) {
+  /* تقليل الرسوم المتحركة على الموبايل */
+  * {
+    animation-duration: 0.2s !important;
+    transition-duration: 0.2s !important;
+  }
+  
+  /* تعطيل بعض التأثيرات الثقيلة على الموبايل */
+  .motion-reduce * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* تحسين التمرير */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* تحسين الأداء */
+  .lazy {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  .lazy.loaded {
+    opacity: 1;
+  }
+  
+  /* تحسين الأداء للعناصر المتحركة */
+  .motion-safe\:animate-none {
+    animation: none !important;
+  }
+  
+  /* تقليل تأثيرات الظلال على الموبايل */
+  .shadow-lg, .shadow-xl {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* تحسين الأداء للصور */
+  img {
+    will-change: auto;
+  }
+}
+
+/* تحسينات عامة للأداء */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* تحسين التمرير */
+html {
+  scroll-behavior: smooth;
+}
+
+/* تحسين الأداء للصور */
+img {
+  max-width: 100%;
+  height: auto;
+  loading: lazy;
+}
+
+/* Smooth Scrolling - lighter */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #7C3AED, #9333EA);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #8B5CF6, #A855F7);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #7C3AED, #9333EA);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Arabic Language Support - Text Only */
+.lang-ar h1, .lang-ar h2, .lang-ar h3,
+.lang-ar h4, .lang-ar h5, .lang-ar h6,
+.lang-ar p, .lang-ar li, .lang-ar .text, 
+.lang-ar .btn span, .lang-ar .nav-link {
+  text-align: right;
+  font-family: "Tajawal", "Cairo", system-ui, sans-serif;
+  letter-spacing: 0;
+}
+
+/* Override for hero title to be centered */
+.lang-ar .hero-title {
+  text-align: center !important;
+}
+
+/* Numbers/icons remain LTR for consistency */
+.lang-ar .num, .lang-ar .kpi, .lang-ar .icon-row { 
+  direction: ltr; 
+  text-align: left; 
+}
+
+/* Lock layout LTR for all containers */
+header, .navbar, .hero, .section, .grid, .row, .buttons, footer { 
+  direction: ltr !important; 
+}
+
+/* Navbar height management */
+:root {
+  --nav-h: 80px; /* Default fallback */
+}
+
+body {
+  padding-top: var(--nav-h);
+}
+
+/* Smooth scrolling with navbar offset */
+section[id] {
+  scroll-margin-top: calc(var(--nav-h) + 12px);
+}
+
+/* Ensure navbar is always on top */
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
+
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-marquee {
+    animation: none !important;
+  }
+  
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
+/* Custom scrollbar for webkit browsers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Performance optimizations */
+* {
+  will-change: auto;
+}
+
+/* Ensure images are responsive */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Yellow text styling */
+.text-cyc-yellow {
+  color: #FACC15;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+  text-decoration-color: #FACC15;
+}
+
+/* Typography improvements */
+h1 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 769px) {
+  h1 {
+    font-size: 3rem;
+  }
+}

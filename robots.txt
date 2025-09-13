@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Update this URL if your production domain differs
+Sitemap: https://cyc-agency.site/sitemap.xml
+

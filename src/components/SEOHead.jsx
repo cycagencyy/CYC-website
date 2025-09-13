@@ -1,0 +1,160 @@
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
+
+function SEOHead({ 
+  title,
+  description,
+  keywords,
+  image,
+  url,
+  type = 'website',
+  language = 'en',
+  author = 'CYC Marketing'
+}) {
+  const siteName = 'CYC Marketing'
+  const baseUrl = window.location.origin
+  const fullUrl = url ? `${baseUrl}${url}` : baseUrl
+  const fullImage = image ? (image.startsWith('http') ? image : `${baseUrl}${image}`) : `${baseUrl}/cyc-logo.png`
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": siteName,
+    "url": baseUrl,
+    "logo": fullImage,
+    "description": description,
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cairo",
+      "addressCountry": "Egypt"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+20-110-053-9306",
+      "contactType": "customer service",
+      "email": "support@cyc-agency.site"
+    },
+    "sameAs": [
+      "https://www.facebook.com/cyc.agency1/",
+      "https://www.instagram.com/cyc.vision",
+      "https://linkedin.com/company/cyc-agency",
+      "https://youtube.com/@cyc-agency"
+    ]
+  }
+
+  return (
+    <Helmet>
+      {/* Basic Meta Tags */}
+      <title>{title} | {siteName}</title>
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content={author} />
+      <meta name="robots" content="index, follow" />
+      <meta name="language" content={language} />
+      <meta name="revisit-after" content="7 days" />
+
+      {/* Open Graph Meta Tags */}
+      <meta property="og:type" content={type} />
+      <meta property="og:title" content={`${title} | ${siteName}`} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={fullImage} />
+      <meta property="og:url" content={fullUrl} />
+      <meta property="og:site_name" content={siteName} />
+      <meta property="og:locale" content={language === 'ar' ? 'ar_EG' : 'en_US'} />
+
+      {/* Twitter Card Meta Tags */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={`${title} | ${siteName}`} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={fullImage} />
+      <meta name="twitter:site" content="@cycmarketing" />
+      <meta name="twitter:creator" content="@cycmarketing" />
+
+      {/* Additional Meta Tags */}
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="theme-color" content="#8B5CF6" />
+      <meta name="msapplication-TileColor" content="#8B5CF6" />
+      <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      <meta name="apple-mobile-web-app-title" content={siteName} />
+
+      {/* Canonical URL */}
+      <link rel="canonical" href={fullUrl} />
+
+      {/* Alternate Language Versions */}
+      <link rel="alternate" hrefLang="en" href={`${baseUrl}${url || ''}`} />
+      <link rel="alternate" hrefLang="ar" href={`${baseUrl}/ar${url || ''}`} />
+      <link rel="alternate" hrefLang="x-default" href={`${baseUrl}${url || ''}`} />
+
+      {/* Favicon */}
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+      {/* Structured Data */}
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+
+      {/* Preconnect to external domains */}
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://images.unsplash.com" />
+    </Helmet>
+  )
+}
+
+// SEO configurations for different pages
+export const seoConfigs = {
+  home: {
+    en: {
+      title: "Digital Marketing Agency | CYC Marketing",
+      description: "Transform your business with CYC Marketing's digital marketing services. Specialized in MENA region with proven results and bilingual expertise.",
+      keywords: "digital marketing, MENA, social media, advertising, SEO, content creation, marketing agency, Egypt, Arabic marketing"
+    },
+    ar: {
+      title: "وكالة التسويق الرقمي | CYC Marketing",
+      description: "حول عملك مع خدمات التسويق الرقمي من CYC Marketing. متخصصون في منطقة الشرق الأوسط وشمال أفريقيا مع نتائج مثبتة وخبرة ثنائية اللغة.",
+      keywords: "التسويق الرقمي, الشرق الأوسط, وسائل التواصل الاجتماعي, الإعلانات, تحسين محركات البحث, إنشاء المحتوى, وكالة تسويق, مصر, التسويق العربي"
+    }
+  },
+  about: {
+    en: {
+      title: "About Us | CYC Marketing Team",
+      description: "Meet the CYC Marketing team. Learn about our mission, values, and expertise in digital marketing across the MENA region.",
+      keywords: "about CYC, marketing team, digital marketing experts, MENA specialists, company mission"
+    },
+    ar: {
+      title: "من نحن | فريق CYC Marketing",
+      description: "تعرف على فريق CYC Marketing. تعرف على مهمتنا وقيمنا وخبرتنا في التسويق الرقمي عبر منطقة الشرق الأوسط وشمال أفريقيا.",
+      keywords: "عن CYC, فريق التسويق, خبراء التسويق الرقمي, متخصصو الشرق الأوسط, مهمة الشركة"
+    }
+  },
+  services: {
+    en: {
+      title: "Digital Marketing Services | CYC Marketing",
+      description: "Comprehensive digital marketing services including social media management, SEO, content creation, and advertising for MENA markets.",
+      keywords: "digital marketing services, social media management, SEO services, content creation, advertising, MENA marketing"
+    },
+    ar: {
+      title: "خدمات التسويق الرقمي | CYC Marketing",
+      description: "خدمات تسويق رقمي شاملة تشمل إدارة وسائل التواصل الاجتماعي وتحسين محركات البحث وإنشاء المحتوى والإعلانات لأسواق الشرق الأوسط.",
+      keywords: "خدمات التسويق الرقمي, إدارة وسائل التواصل, خدمات تحسين محركات البحث, إنشاء المحتوى, الإعلانات, تسويق الشرق الأوسط"
+    }
+  },
+  contact: {
+    en: {
+      title: "Contact Us | CYC Marketing",
+      description: "Get in touch with CYC Marketing. Contact our digital marketing experts for consultation and project discussions.",
+      keywords: "contact CYC, digital marketing consultation, project inquiry, marketing experts contact"
+    },
+    ar: {
+      title: "تواصل معنا | CYC Marketing",
+      description: "تواصل مع CYC Marketing. اتصل بخبراء التسويق الرقمي لدينا للاستشارة ومناقشة المشاريع.",
+      keywords: "تواصل مع CYC, استشارة التسويق الرقمي, استفسار المشروع, تواصل خبراء التسويق"
+    }
+  }
+}
+
+export default SEOHead
+
