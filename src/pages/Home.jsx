@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { ParallaxSection, FloatingElements, StaggeredContainer, StaggeredItem, MagneticHover, AnimatedGradientText } from '../components/ParallaxSection'
 import SEOHead, { seoConfigs } from '../components/SEOHead'
 import LazyImage from '../components/LazyImage'
+import VisitorCounter from '../components/VisitorCounter'
 
 function Home() {
   const [language, setLanguage] = useState(() => {
@@ -546,6 +547,31 @@ function Home() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Live Visitors Counter Section */}
+      <section className="py-16 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-gray-800 dark:to-gray-700">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+              {language === 'ar' ? 'الزوار المباشرون' : 'Live Visitors'}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-8">
+              {language === 'ar' ? 'انضم إلى آلاف الزوار الذين يثقون في خدماتنا' : 'Join thousands of visitors who trust our services'}
+            </p>
+            <div className="flex justify-center">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-2xl border border-gray-200 dark:border-gray-700">
+                <VisitorCounter />
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

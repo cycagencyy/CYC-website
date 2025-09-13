@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import VisitorCounter from './VisitorCounter'
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -99,6 +100,10 @@ function Navbar() {
         </Link>
         {/* Professional Navigation Links */}
         <div className="hidden md:flex items-center space-x-10">
+          {/* Visitor Counter */}
+          <div className="hidden lg:block">
+            <VisitorCounter />
+          </div>
           <Link 
             to="/" 
             className={`nav-link font-semibold transition-all duration-300 relative group py-2 ${
@@ -243,6 +248,10 @@ function Navbar() {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg">
           <div className="px-4 py-2 space-y-1">
+            {/* Mobile Visitor Counter */}
+            <div className="px-3 py-2 border-b border-gray-200 dark:border-gray-700">
+              <VisitorCounter />
+            </div>
             <Link 
               to="/" 
               className="block px-3 py-2 text-gray-700 dark:text-gray-300 hover:text-cyc-purple hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors"
