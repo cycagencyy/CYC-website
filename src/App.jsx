@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 import Loading from './components/Loading'
 import ScrollToTop from './components/ScrollToTop'
 import WhatsAppButton from './components/WhatsAppButton'
+import ChatWidget from './components/ChatWidget'
 import { useToast } from './components/Toast'
 import { PageSkeleton } from './components/LoadingSkeleton'
 import { initPerformanceOptimizations } from './utils/performanceOptimization'
@@ -22,6 +23,7 @@ const ThankYou = lazy(() => import('./pages/ThankYou'))
 const FAQ = lazy(() => import('./pages/FAQ'))
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
 const TermsOfService = lazy(() => import('./pages/TermsOfService'))
+const Sitemap = lazy(() => import('./pages/Sitemap'))
 
 function App() {
   const [loading, setLoading] = useState(true)
@@ -118,6 +120,7 @@ function App() {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
+            <Route path="/sitemap" element={<Sitemap />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
@@ -125,6 +128,7 @@ function App() {
       <Footer />
       <ScrollToTop />
       <WhatsAppButton />
+      <ChatWidget />
       <ToastContainer />
     </div>
   )
