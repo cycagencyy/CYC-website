@@ -1,5 +1,39 @@
-[33m9807da4[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Add clear success message before redirect to Thank You page
-[33m126621f[m Simplify contact form - remove complex fallback logic and fix redirect
-[33m4a131ce[m Add fallback form submission methods and enhanced debugging
-[33me8995ca[m Fix Thank You page redirect - use React Router navigate instead of window.location
-[33m9a22bb7[m Fix contact form submission - use FormData and add debugging
+[1mdiff --git a/public/_headers b/public/_headers[m
+[1mnew file mode 100644[m
+[1mindex 0000000..4f28d35[m
+[1m--- /dev/null[m
+[1m+++ b/public/_headers[m
+[36m@@ -0,0 +1,33 @@[m
+[32m+[m[32m# Fix MIME types for JavaScript modules[m
+[32m+[m[32m/assets/*.js[m
+[32m+[m[32m  Content-Type: application/javascript; charset=utf-8[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m# Fix MIME types for CSS[m
+[32m+[m[32m/assets/*.css[m
+[32m+[m[32m  Content-Type: text/css; charset=utf-8[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m# Fix MIME types for images[m
+[32m+[m[32m/assets/*.png[m
+[32m+[m[32m  Content-Type: image/png[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m/assets/*.jpg[m
+[32m+[m[32m  Content-Type: image/jpeg[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m/assets/*.jpeg[m
+[32m+[m[32m  Content-Type: image/jpeg[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m/assets/*.svg[m
+[32m+[m[32m  Content-Type: image/svg+xml[m
+[32m+[m[32m  Cache-Control: public, max-age=31536000, immutable[m
+[32m+[m
+[32m+[m[32m# Security headers[m
+[32m+[m[32m/*[m
+[32m+[m[32m  X-Frame-Options: DENY[m
+[32m+[m[32m  X-XSS-Protection: 1; mode=block[m
+[32m+[m[32m  X-Content-Type-Options: nosniff[m
+[32m+[m[32m  Referrer-Policy: strict-origin-when-cross-origin[m
