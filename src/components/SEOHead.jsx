@@ -9,9 +9,9 @@ function SEOHead({
   url,
   type = 'website',
   language = 'en',
-  author = 'CYC Marketing'
+  author = 'CYC Agency'
 }) {
-  const siteName = 'CYC Marketing'
+  const siteName = 'CYC Agency'
   const baseUrl = window.location.origin
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl
   const fullImage = image ? (image.startsWith('http') ? image : `${baseUrl}${image}`) : `${baseUrl}/cyc-logo.png`
@@ -188,14 +188,14 @@ function SEOHead({
 export const seoConfigs = {
   home: {
     en: {
-      title: "Digital Marketing Agency | CYC Marketing",
-      description: "Transform your business with CYC Marketing's digital marketing services. Specialized in MENA region with proven results and bilingual expertise.",
-      keywords: "digital marketing, MENA, social media, advertising, SEO, content creation, marketing agency, Egypt, Arabic marketing"
+      title: "CYC Agency | Premium Digital Marketing Solutions",
+      description: "We turn attention into growth. CYC Agency specializes in social media, paid campaigns, SEO, and creative strategies to boost your brand.",
+      keywords: "digital marketing, social media marketing, paid advertising, SEO, brand growth, creative strategies, CYC Agency, premium marketing solutions"
     },
     ar: {
-      title: "وكالة التسويق الرقمي | CYC Marketing",
-      description: "حول عملك مع خدمات التسويق الرقمي من CYC Marketing. متخصصون في منطقة الشرق الأوسط وشمال أفريقيا مع نتائج مثبتة وخبرة ثنائية اللغة.",
-      keywords: "التسويق الرقمي, الشرق الأوسط, وسائل التواصل الاجتماعي, الإعلانات, تحسين محركات البحث, إنشاء المحتوى, وكالة تسويق, مصر, التسويق العربي"
+      title: "CYC Agency | حلول التسويق الرقمي المتميزة",
+      description: "نحول الانتباه إلى نمو. CYC Agency متخصصون في وسائل التواصل الاجتماعي والحملات المدفوعة وتحسين محركات البحث والاستراتيجيات الإبداعية لتعزيز علامتك التجارية.",
+      keywords: "التسويق الرقمي, تسويق وسائل التواصل الاجتماعي, الإعلانات المدفوعة, تحسين محركات البحث, نمو العلامة التجارية, الاستراتيجيات الإبداعية, CYC Agency, حلول التسويق المتميزة"
     }
   },
   about: {
