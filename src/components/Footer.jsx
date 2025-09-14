@@ -139,10 +139,6 @@ function Footer() {
                   <a 
                     href={link.url} 
                     className="text-gray-300 hover:text-white transition-colors"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                    viewport={{ once: true }}
                   >
                     {link.name}
                   </a>
@@ -226,10 +222,6 @@ function Footer() {
                   <a 
                     href={link.url} 
                     className="text-gray-300 hover:text-white transition-colors"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                    viewport={{ once: true }}
                   >
                     {link.name}
                   </a>
