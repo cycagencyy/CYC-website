@@ -11,8 +11,8 @@ export default defineConfig({
     minify: 'esbuild',
     target: 'es2015',
     cssCodeSplit: true,
-    // تحسين الأداء المتقدم
-    chunkSizeWarningLimit: 800,
+    // تحسين الأداء للموبايل
+    chunkSizeWarningLimit: 1000,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -23,20 +23,12 @@ export default defineConfig({
         },
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]',
-        // تحسين التحميل المتوازي
-        experimentalMinChunkSize: 20000
-      }
-    },
-    // تحسينات إضافية للأداء
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log']
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     }
   },
+  // إعدادات خاصة بـ Cloudflare
+  base: './',
   publicDir: 'public',
   server: {
     port: 5173,
