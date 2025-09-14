@@ -11,8 +11,8 @@ export default defineConfig({
     minify: 'esbuild',
     target: 'es2015',
     cssCodeSplit: true,
-    // تحسين الأداء للموبايل
-    chunkSizeWarningLimit: 1000,
+    // تحسين الأداء المتقدم
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -23,7 +23,17 @@ export default defineConfig({
         },
         chunkFileNames: 'assets/[name]-[hash].js',
         entryFileNames: 'assets/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash].[ext]'
+        assetFileNames: 'assets/[name]-[hash].[ext]',
+        // تحسين التحميل المتوازي
+        experimentalMinChunkSize: 20000
+      }
+    },
+    // تحسينات إضافية للأداء
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+        pure_funcs: ['console.log']
       }
     }
   },

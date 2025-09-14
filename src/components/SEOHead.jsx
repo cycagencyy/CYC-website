@@ -23,23 +23,67 @@ function SEOHead({
     "url": baseUrl,
     "logo": fullImage,
     "description": description,
+    "foundingDate": "2024",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cairo",
-      "addressCountry": "Egypt"
+      "addressCountry": "Egypt",
+      "addressRegion": "Cairo"
     },
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+20-110-053-9306",
       "contactType": "customer service",
-      "email": "support@cyc-agency.site"
+      "email": "support@cyc-agency.site",
+      "availableLanguage": ["Arabic", "English"]
     },
     "sameAs": [
       "https://www.facebook.com/cyc.agency1/",
       "https://www.instagram.com/cyc.vision",
       "https://linkedin.com/company/cyc-agency",
       "https://youtube.com/@cyc-agency"
-    ]
+    ],
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.0444,
+        "longitude": 31.2357
+      },
+      "geoRadius": "5000000"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Digital Marketing Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Digital Marketing",
+            "description": "Comprehensive digital marketing strategies"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Social Media Management",
+            "description": "Professional social media management"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO Services",
+            "description": "Search engine optimization"
+          }
+        }
+      ]
+    },
+    "keywords": "digital marketing, social media management, SEO, content creation, web design, MENA, Egypt, Arabic marketing",
+    "knowsAbout": ["Digital Marketing", "Social Media Marketing", "SEO", "Content Creation", "Web Design", "Branding"]
   }
 
   return (
@@ -77,6 +121,23 @@ function SEOHead({
       <meta name="apple-mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-status-bar-style" content="default" />
       <meta name="apple-mobile-web-app-title" content={siteName} />
+      
+      {/* SEO Meta Tags */}
+      <meta name="geo.region" content="EG-C" />
+      <meta name="geo.placename" content="Cairo" />
+      <meta name="geo.position" content="30.0444;31.2357" />
+      <meta name="ICBM" content="30.0444, 31.2357" />
+      <meta name="distribution" content="global" />
+      <meta name="rating" content="general" />
+      <meta name="revisit-after" content="1 days" />
+      <meta name="target" content="all" />
+      <meta name="audience" content="all" />
+      <meta name="coverage" content="worldwide" />
+      
+      {/* Performance Meta Tags */}
+      <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="format-detection" content="telephone=no" />
+      <meta name="mobile-web-app-capable" content="yes" />
 
       {/* Canonical URL */}
       <link rel="canonical" href={fullUrl} />

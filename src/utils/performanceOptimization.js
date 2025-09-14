@@ -74,4 +74,47 @@ export const initPerformanceOptimizations = () => {
   if ('memory' in performance) {
     console.log('Memory usage:', performance.memory)
   }
+  
+  // Preconnect to external domains
+  const externalDomains = [
+    'https://fonts.googleapis.com',
+    'https://fonts.gstatic.com',
+    'https://www.googletagmanager.com',
+    'https://plausible.io'
+  ]
+
+  externalDomains.forEach(domain => {
+    const link = document.createElement('link')
+    link.rel = 'preconnect'
+    link.href = domain
+    if (domain.includes('fonts.gstatic.com')) {
+      link.crossOrigin = 'anonymous'
+    }
+    document.head.appendChild(link)
+  })
+  
+  // Optimize scroll performance
+  let ticking = false
+  const optimizedScrollHandler = () => {
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        // Handle scroll events here
+        ticking = false
+      })
+      ticking = true
+    }
+  }
+
+  window.addEventListener('scroll', optimizedScrollHandler, { passive: true })
+  
+  // Service Worker registration for caching (in production)
+  if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        console.log('SW registered: ', registration)
+      })
+      .catch(registrationError => {
+        console.log('SW registration failed: ', registrationError)
+      })
+  }
 }

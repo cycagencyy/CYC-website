@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '../components/Toast'
+import jsPDF from 'jspdf'
 
 function Contact() {
   const navigate = useNavigate()
@@ -18,6 +19,7 @@ function Contact() {
     message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showPdfDownload, setShowPdfDownload] = useState(false)
   const { showSuccess, showError } = useToast()
 
   useEffect(() => {
@@ -35,6 +37,134 @@ function Contact() {
       ...prev,
       [name]: value
     }))
+  }
+
+  const downloadPdf = () => {
+    try {
+      // Try to download the pre-generated PDF first
+      const link = document.createElement('a')
+      link.href = '/Company-Profile CYC.pdf'
+      link.download = 'Company-Profile-CYC.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      setShowPdfDownload(false)
+    } catch (error) {
+      console.error('Error downloading PDF:', error)
+      // Fallback to generating PDF dynamically
+      try {
+        const doc = new jsPDF()
+        
+        // Set font
+        doc.setFont('helvetica')
+        
+        // Add title
+        doc.setFontSize(24)
+        doc.setTextColor(102, 126, 234)
+        doc.text('CYC Marketing Agency', 20, 30)
+        
+        // Add subtitle
+        doc.setFontSize(14)
+        doc.setTextColor(100, 100, 100)
+        doc.text('Your Digital Marketing Partner in the MENA Region', 20, 45)
+        
+        // Add line separator
+        doc.setDrawColor(102, 126, 234)
+        doc.setLineWidth(0.5)
+        doc.line(20, 55, 190, 55)
+        
+        // Add content sections
+        doc.setFontSize(16)
+        doc.setTextColor(102, 126, 234)
+        doc.text('About CYC Marketing', 20, 70)
+        
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        const aboutText = 'CYC Marketing Agency is a full-service digital marketing company specializing in helping businesses in the Middle East and North Africa (MENA) region achieve their online goals. We combine strategic marketing, creative design, and data-driven results to deliver exceptional outcomes for our clients.'
+        doc.text(doc.splitTextToSize(aboutText, 170), 20, 80)
+        
+        // Services section
+        doc.setFontSize(16)
+        doc.setTextColor(102, 126, 234)
+        doc.text('Our Services', 20, 120)
+        
+        const services = [
+          '• Digital Marketing - Comprehensive strategies for MENA market',
+          '• Social Media Management - Professional management in Arabic & English',
+          '• Advertising - Targeted campaigns on Google, Facebook, Instagram',
+          '• Graphic Design - Creative logos, branding, and marketing materials',
+          '• Content Creation - High-quality content in Arabic and English',
+          '• SEO Optimization - Improve website visibility and organic traffic'
+        ]
+        
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        let yPosition = 130
+        services.forEach(service => {
+          doc.text(service, 20, yPosition)
+          yPosition += 8
+        })
+        
+        // Why Choose CYC section
+        doc.setFontSize(16)
+        doc.setTextColor(102, 126, 234)
+        doc.text('Why Choose CYC?', 20, 190)
+        
+        const stats = [
+          '75+ Successful Projects',
+          '300% Average Engagement Increase',
+          '150% Lead Generation Boost',
+          '24/7 Client Support'
+        ]
+        
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        yPosition = 200
+        stats.forEach(stat => {
+          doc.text(stat, 20, yPosition)
+          yPosition += 8
+        })
+        
+        // Contact information
+        doc.setFontSize(16)
+        doc.setTextColor(102, 126, 234)
+        doc.text('Contact Information', 20, 240)
+        
+        const contactInfo = [
+          'Email: support@cyc-agency.site',
+          'Phone: +20 110 053 9306',
+          'WhatsApp: +20 110 053 9306',
+          'Location: Cairo, Egypt'
+        ]
+        
+        doc.setFontSize(10)
+        doc.setTextColor(0, 0, 0)
+        yPosition = 250
+        contactInfo.forEach(info => {
+          doc.text(info, 20, yPosition)
+          yPosition += 8
+        })
+        
+        // Footer
+        doc.setFontSize(8)
+        doc.setTextColor(100, 100, 100)
+        doc.text('© 2024 CYC Marketing Agency. All rights reserved.', 20, 280)
+        doc.text('Thank you for your interest in our services!', 20, 285)
+        
+        // Save the PDF
+        doc.save('CYC-Marketing-Brochure.pdf')
+        
+        setShowPdfDownload(false)
+      } catch (fallbackError) {
+        console.error('Error generating PDF:', fallbackError)
+        // Final fallback to opening HTML version
+        const newWindow = window.open('/cyc-brochure.html', '_blank')
+        if (newWindow) {
+          newWindow.focus()
+        }
+        setShowPdfDownload(false)
+      }
+    }
   }
 
   const handleSubmit = async (e) => {
@@ -73,7 +203,10 @@ function Contact() {
         console.log('Form submitted successfully!')
         
         // Show success message
-        showSuccess(language === 'en' ? '✅ Message sent successfully! Redirecting...' : '✅ تم إرسال الرسالة بنجاح! جاري التوجيه...')
+        showSuccess(language === 'en' ? '✅ Message sent successfully! Download our company profile below.' : '✅ تم إرسال الرسالة بنجاح! حمل ملف الشركة أدناه.')
+        
+        // Show PDF download option
+        setShowPdfDownload(true)
         
         // Reset form
         setFormData({
@@ -86,17 +219,20 @@ function Contact() {
           message: ''
         })
         
-        // Redirect to thank you page after showing success message
+        // Redirect to thank you page after 5 seconds (giving time for PDF download)
         console.log('Redirecting to thank you page...')
         setTimeout(() => {
           navigate('/thank-you')
-        }, 1500) // 1.5 seconds to show the success message
+        }, 5000) // 5 seconds to allow PDF download
         
       } else {
         console.log('Formspree returned non-200 status, but form might still be submitted...')
         
         // Show success message (Formspree might have received the form even with redirect)
-        showSuccess(language === 'en' ? '✅ Message sent successfully! Redirecting...' : '✅ تم إرسال الرسالة بنجاح! جاري التوجيه...')
+        showSuccess(language === 'en' ? '✅ Message sent successfully! Download our company profile below.' : '✅ تم إرسال الرسالة بنجاح! حمل ملف الشركة أدناه.')
+        
+        // Show PDF download option
+        setShowPdfDownload(true)
         
         // Reset form
         setFormData({
@@ -112,7 +248,7 @@ function Contact() {
         // Redirect to thank you page
         setTimeout(() => {
           navigate('/thank-you')
-        }, 1500)
+        }, 5000)
       }
       
       console.log('=== FORM SUBMISSION END ===')
@@ -124,7 +260,10 @@ function Contact() {
         console.log('CORS error detected - Formspree likely received the form but redirected')
         
         // Show success message anyway (form was probably submitted)
-        showSuccess(language === 'en' ? '✅ Message sent successfully! Redirecting...' : '✅ تم إرسال الرسالة بنجاح! جاري التوجيه...')
+        showSuccess(language === 'en' ? '✅ Message sent successfully! Download our company profile below.' : '✅ تم إرسال الرسالة بنجاح! حمل ملف الشركة أدناه.')
+        
+        // Show PDF download option
+        setShowPdfDownload(true)
         
         // Reset form
         setFormData({
@@ -140,7 +279,7 @@ function Contact() {
         // Redirect to thank you page
         setTimeout(() => {
           navigate('/thank-you')
-        }, 1500)
+        }, 5000)
       } else {
         // Real network error
         showError(language === 'en' ? '❌ Network error. Please check your internet connection and try again.' : '❌ خطأ في الشبكة. يرجى التحقق من الاتصال بالإنترنت والمحاولة مرة أخرى.')
@@ -163,8 +302,10 @@ function Contact() {
       message: "Your Message",
       submit: "Send Message",
       submitting: "Sending...",
-      successMessage: "Message sent successfully! Redirecting...",
+      successMessage: "Message sent successfully! Download our brochure below.",
       errorMessage: "Failed to send message. Please try again.",
+      downloadBrochure: "Download Our Company Profile",
+      downloadDescription: "Get our comprehensive company profile with all our services, success stories, and contact information.",
       contactInfo: "Contact Information",
       address: "Cairo, Egypt",
       phoneNumber: "+20 110 053 9306",
@@ -190,8 +331,10 @@ function Contact() {
       message: "رسالتك",
       submit: "إرسال الرسالة",
       submitting: "جاري الإرسال...",
-      successMessage: "تم إرسال الرسالة بنجاح! جاري التوجيه...",
+      successMessage: "تم إرسال الرسالة بنجاح! حمل كتيبنا أدناه.",
       errorMessage: "فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى.",
+      downloadBrochure: "حمل ملف الشركة الخاص بنا",
+      downloadDescription: "احصل على ملف الشركة الشامل مع جميع خدماتنا وقصص النجاح ومعلومات التواصل.",
       contactInfo: "معلومات التواصل",
       address: "القاهرة، مصر",
       phoneNumber: "+20 110 053 9306",
@@ -335,6 +478,41 @@ function Contact() {
                 {isSubmitting ? content[language].submitting : content[language].submit}
               </motion.button>
             </form>
+
+            {/* PDF Download Section */}
+            {showPdfDownload && (
+              <motion.div 
+                className="mt-6 p-6 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl border border-green-200 dark:border-green-700"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-green-100 dark:bg-green-800 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                  </div>
+                  <h4 className="text-lg font-bold text-gray-800 dark:text-white mb-2">
+                    {content[language].downloadBrochure}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300 mb-4">
+                    {content[language].downloadDescription}
+                  </p>
+                  <motion.button
+                    onClick={downloadPdf}
+                    className="bg-gradient-to-r from-green-500 to-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <svg className="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    {language === 'en' ? 'Download Company Profile' : 'تحميل ملف الشركة'}
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
 
           {/* Contact Information */}
