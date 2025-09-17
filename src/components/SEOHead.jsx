@@ -14,7 +14,7 @@ function SEOHead({
   const siteName = 'CYC Agency'
   const baseUrl = window.location.origin
   const fullUrl = url ? `${baseUrl}${url}` : baseUrl
-  const fullImage = image ? (image.startsWith('http') ? image : `${baseUrl}${image}`) : `${baseUrl}/cyc-logo.png`
+  const fullImage = image ? (image.startsWith('http') ? image : `${baseUrl}${image}`) : `https://i.ibb.co/6Jv05tLN/CYC-GRAAH-LOGO-removebg-preview.png`
 
   const structuredData = {
     "@context": "https://schema.org",

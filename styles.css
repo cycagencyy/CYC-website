@@ -991,7 +991,7 @@ section { padding-top: var(--space-4xl); padding-bottom: var(--space-4xl); }
 .hero-watermark {
     position: absolute;
     inset: 0;
-    background: url('cyc-logo.png') center/contain no-repeat;
+    background: url('https://i.ibb.co/6Jv05tLN/CYC-GRAAH-LOGO-removebg-preview.png') center/contain no-repeat;
     opacity: 0.05;
     filter: grayscale(100%) contrast(120%);
     transform: translateZ(0);
