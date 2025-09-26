@@ -87,7 +87,7 @@ function Navbar() {
                 : 'bg-cyc-yellow/30'
             }`}></div>
             <img 
-              src="https://i.ibb.co/6Jv05tLN/CYC-GRAAH-LOGO-removebg-preview.png" 
+              src="/cyc-logo.png" 
               alt="CYC Marketing Logo" 
               className="relative h-10 md:h-12 w-auto transition-all duration-500 hover:scale-110 hover:-translate-y-1 rounded-2xl p-1.5"
               style={{

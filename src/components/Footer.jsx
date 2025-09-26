@@ -49,7 +49,7 @@ function Footer() {
                 
                 {/* Main footer logo with premium effects */}
                 <img 
-                  src="https://i.ibb.co/6Jv05tLN/CYC-GRAAH-LOGO-removebg-preview.png" 
+                  src="/cyc-logo.png" 
                   alt="CYC Marketing Logo" 
                   className="relative w-24 h-24 rounded-2xl transition-all duration-500 group-hover:scale-105 group-hover:-translate-y-1"
                   style={{

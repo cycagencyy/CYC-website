@@ -363,7 +363,7 @@ window.addEventListener('error', (e) => {
 // ===== PRELOADER FOR CRITICAL RESOURCES =====
 function preloadCriticalResources() {
     const criticalImages = [
-        'cyc-logo.png'
+        '/cyc-logo.png'
     ];
     
     criticalImages.forEach(src => {

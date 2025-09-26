@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useToast } from '../components/Toast'
-import jsPDF from 'jspdf'
+// import jsPDF from 'jspdf'
 
 function Contact() {
   const navigate = useNavigate()
@@ -51,119 +51,12 @@ function Contact() {
       setShowPdfDownload(false)
     } catch (error) {
       console.error('Error downloading PDF:', error)
-      // Fallback to generating PDF dynamically
-      try {
-        const doc = new jsPDF()
-        
-        // Set font
-        doc.setFont('helvetica')
-        
-        // Add title
-        doc.setFontSize(24)
-        doc.setTextColor(102, 126, 234)
-        doc.text('CYC Marketing Agency', 20, 30)
-        
-        // Add subtitle
-        doc.setFontSize(14)
-        doc.setTextColor(100, 100, 100)
-        doc.text('Your Digital Marketing Partner in the MENA Region', 20, 45)
-        
-        // Add line separator
-        doc.setDrawColor(102, 126, 234)
-        doc.setLineWidth(0.5)
-        doc.line(20, 55, 190, 55)
-        
-        // Add content sections
-        doc.setFontSize(16)
-        doc.setTextColor(102, 126, 234)
-        doc.text('About CYC Marketing', 20, 70)
-        
-        doc.setFontSize(10)
-        doc.setTextColor(0, 0, 0)
-        const aboutText = 'CYC Marketing Agency is a full-service digital marketing company specializing in helping businesses in the Middle East and North Africa (MENA) region achieve their online goals. We combine strategic marketing, creative design, and data-driven results to deliver exceptional outcomes for our clients.'
-        doc.text(doc.splitTextToSize(aboutText, 170), 20, 80)
-        
-        // Services section
-        doc.setFontSize(16)
-        doc.setTextColor(102, 126, 234)
-        doc.text('Our Services', 20, 120)
-        
-        const services = [
-          '• Digital Marketing - Comprehensive strategies for MENA market',
-          '• Social Media Management - Professional management in Arabic & English',
-          '• Advertising - Targeted campaigns on Google, Facebook, Instagram',
-          '• Graphic Design - Creative logos, branding, and marketing materials',
-          '• Content Creation - High-quality content in Arabic and English',
-          '• SEO Optimization - Improve website visibility and organic traffic'
-        ]
-        
-        doc.setFontSize(10)
-        doc.setTextColor(0, 0, 0)
-        let yPosition = 130
-        services.forEach(service => {
-          doc.text(service, 20, yPosition)
-          yPosition += 8
-        })
-        
-        // Why Choose CYC section
-        doc.setFontSize(16)
-        doc.setTextColor(102, 126, 234)
-        doc.text('Why Choose CYC?', 20, 190)
-        
-        const stats = [
-          '75+ Successful Projects',
-          '300% Average Engagement Increase',
-          '150% Lead Generation Boost',
-          '24/7 Client Support'
-        ]
-        
-        doc.setFontSize(10)
-        doc.setTextColor(0, 0, 0)
-        yPosition = 200
-        stats.forEach(stat => {
-          doc.text(stat, 20, yPosition)
-          yPosition += 8
-        })
-        
-        // Contact information
-        doc.setFontSize(16)
-        doc.setTextColor(102, 126, 234)
-        doc.text('Contact Information', 20, 240)
-        
-        const contactInfo = [
-          'Email: support@cyc-agency.site',
-          'Phone: +20 110 053 9306',
-          'WhatsApp: +20 110 053 9306',
-          'Location: Cairo, Egypt'
-        ]
-        
-        doc.setFontSize(10)
-        doc.setTextColor(0, 0, 0)
-        yPosition = 250
-        contactInfo.forEach(info => {
-          doc.text(info, 20, yPosition)
-          yPosition += 8
-        })
-        
-        // Footer
-        doc.setFontSize(8)
-        doc.setTextColor(100, 100, 100)
-        doc.text('© 2024 CYC Marketing Agency. All rights reserved.', 20, 280)
-        doc.text('Thank you for your interest in our services!', 20, 285)
-        
-        // Save the PDF
-        doc.save('CYC-Marketing-Brochure.pdf')
-        
-        setShowPdfDownload(false)
-      } catch (fallbackError) {
-        console.error('Error generating PDF:', fallbackError)
-        // Final fallback to opening HTML version
-        const newWindow = window.open('/cyc-brochure.html', '_blank')
-        if (newWindow) {
-          newWindow.focus()
-        }
-        setShowPdfDownload(false)
+      // Fallback: Open the PDF in a new tab
+      const newWindow = window.open('/Company-Profile CYC.pdf', '_blank')
+      if (newWindow) {
+        newWindow.focus()
       }
+      setShowPdfDownload(false)
     }
   }
 
