@@ -28,7 +28,7 @@ export default defineConfig({
     }
   },
   // إعدادات خاصة بـ Cloudflare
-  base: './',
+  base: '/',
   publicDir: 'public',
   server: {
     port: 5173,
